@@ -169,10 +169,10 @@ class GameScene extends Phaser.Scene {
            
         }
         
-        cloud1.tilePositionX -= 1;
-        cloud2.tilePositionX -= 1;
-        snow.tilePositionY -= 1;
-        bg.tilePositionX += 2;
+        cloud1.tilePositionX -= 2;
+        cloud2.tilePositionX -= 2;
+        snow.tilePositionY -= 2;
+        bg.tilePositionX += 3;
         
         
     }
