@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 
-class GameScene extends Phaser.Scene {
+class GameScene1TP extends Phaser.Scene {
     constructor(test) {
         super({
-            key: 'GameScene'
+            key: 'GameScene1TP'
         });
     }
 
@@ -19,4 +19,4 @@ class GameScene extends Phaser.Scene {
         
     }
 }
-export default GameScene;
+export default GameScene1TP;
