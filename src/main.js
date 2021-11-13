@@ -1,6 +1,7 @@
 import 'phaser';
 import Phaser from 'phaser';
-import GameScene from './scenes/GameScene';
+import GameScene from './scenes/GameScene1(Tonpor)';
+import GameScene from './scenes/GameScene2(Pol)';
 
 
 const config = {
@@ -9,7 +10,7 @@ const config = {
     pixelArt: true,
     roundPixels: true,
     parent: 'content',
-    width: 450,
+    width: 1080,
     height: 720,
     physics: {
         default: 'arcade',
