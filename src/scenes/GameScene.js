@@ -16,7 +16,7 @@ let keyCtrl;
 let jump;
 let bloop;
 let sparkle;
-
+let queenJumpEvent;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -86,17 +86,7 @@ class GameScene extends Phaser.Scene {
             yoyo: true
            
         })
-        this.anims.create({
-            key: 'queenJump',
-            frames: this.anims.generateFrameNumbers('queen2', {
-                start: 0,
-                end: 8
-            }),
-            duration: 1000,
-            framerate: 9,
-            repeat: 1,
-           
-        }) 
+        
         this.anims.create({
             key: 'queenSlide',
             frames: this.anims.generateFrameNumbers('queen2', {
@@ -108,8 +98,33 @@ class GameScene extends Phaser.Scene {
             repeat: 1,
            
         }) 
-      
-      
+        this.anims.create({
+            key: 'queenJump',
+            frames: this.anims.generateFrameNumbers('queen2', {
+                start: 0,
+                end: 8
+            }),
+            duration: 1000,
+            framerate: 9,
+            repeat: 1,
+           
+        }) 
+    //     startJump(); {
+            
+    //         queen.timer = queen.time.addEvent({
+    //             delay: 100,
+    //             callback: queen.tick,
+    //             callbackScope: queen,
+    //             loop: true
+                
+    //         });
+    //         queen.setVelocityY(-100);
+    //     }
+    //     endJump(); {
+    //         queen.timer.remove();
+    // }
+       
+        
         
         
         queen.setCollideWorldBounds(true);
@@ -135,13 +150,16 @@ class GameScene extends Phaser.Scene {
             jump.play({loop: false});
         }
         else if (keySb.isDown) {
-            
-            queen.anims.play('queenJump', true,)
-            
-            
             queen.setVelocityY(-100);
+            queen.anims.play('queenJump', true,)
+        //    queen.startJump;
         
         }
+        // else if (keySb.isUp) {
+            
+        //     queen.endJump;
+         
+        //  }
         else if (Phaser.Input.Keyboard.JustDown(keyCtrl)) {
             bloop.play({loop: false});
         }
@@ -159,9 +177,6 @@ class GameScene extends Phaser.Scene {
             
             queen.anims.play('queenSleep', true,)
             
-
-            
-
         }else{
             
 
