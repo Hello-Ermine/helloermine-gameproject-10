@@ -52,7 +52,7 @@ class GameScene extends Phaser.Scene {
             }),
             duration: 500,
             framerate: 0,
-            repeat: 1,
+            repeat: 0,
            
         }) 
     
@@ -76,13 +76,20 @@ class GameScene extends Phaser.Scene {
     
        
         if (Phaser.Input.Keyboard.JustDown(keySb)) {
-            jump.play({loop: false});
+            // jump.play({loop: false});
+            // ninja.anims.play('ninjaJump', true,)
+            ninja.anims.play('ninjaJump', true,)
+            ninja.setVelocityY(-500);
+            
         }
         else if (keySb.isDown) {
-            ninja.setVelocityY(-100);
-            ninja.anims.play('ninjaJump', true,)
+            
+            // setTimeout(function() { 
+            //     ninja.anims.play('ninjaJump', true,)
+            //     ninja.setVelocityY(-100) }, 1000);;
+            
         }
-        else{
+        else{ 
             
 
         ninja.anims.play('ninjaRun', true);
