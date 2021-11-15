@@ -9,14 +9,14 @@ let ground;
 let keyA;
 let keyD;
 let keyX;
-let queen;
+let ninja;
 let theme;
 let keySb;
 let keyCtrl;
 let jump;
 let bloop;
 let sparkle;
-let queenJumpEvent;
+
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -30,105 +30,102 @@ class GameScene extends Phaser.Scene {
         this.load.audio('jump','src/sound/jump.mp3');
         this.load.audio('bloop','src/sound/bell.mp3');
         this.load.audio('sparkle','src/sound/sparkle.mp3');
-        this.load.image('bg','src/image/bg05.png');
+        this.load.image('bg','src/image/bg06.png');
         this.load.image('ground','src/image/layers/ground.png');
         this.load.image('cloud1','src/image/layers/clouds_1.png');
         this.load.image('cloud2','src/image/layers/clouds_2.png');
         this.load.image('snow','src/image/layers/snowfalling.png');
         
-        this.load.spritesheet('queen','src/image/spritesheet (5).png',{frameWidth: 382, frameHeight : 382});
-        this.load.spritesheet('queen2','src/image/cookie1.png',{frameWidth: 382, frameHeight : 382});
+        this.load.spritesheet('ninja','src/image/spritesheet (7).png',{frameWidth: 218, frameHeight : 164});
+        //this.load.spritesheet('ninja2','src/image/cookie1.png',{frameWidth: 382, frameHeight : 382});
 
     
     }
 
     create() {
-        bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1).setScale(0.67);
-        ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,0).setImmovable().setVisible();
-        cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(3).setScale(0.67);
-        cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(4).setScale(0.67);
-        snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(5).setScale(0.67);
+        bg = this.add.tileSprite(0,0,1080,720,'bg').setOrigin(0,0).setDepth(1).setScale(1);
+        ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
+        // cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(3).setScale(0.67);
+        // cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(4).setScale(0.67);
+        // snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(5).setScale(0.67);
         
         
       
-        queen = this.physics.add.sprite(150,400,'queen').setScale(0.7).setDepth(10).setSize(250,168).setOffset(40,210).setGravityY(1000);
-       
+        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(1000);
+      
         this.anims.create({
-            key: 'queenAni2',
-            frames: this.anims.generateFrameNumbers('queen', {
-                start: 10,
-                end: 15
-            }),
-            duration: 1000,
-            framerate: 10,
-            repeat: -1
-            
-        })
-        this.anims.create({
-            key: 'queenDash',
-            frames: this.anims.generateFrameNumbers('queen', {
-                start: 16,
-                end: 21
-            }),
-            duration: 1000,
-            framerate: 10,
-            repeat: -1
-        })
-        this.anims.create({
-            key: 'queenSleep',
-            frames: this.anims.generateFrameNumbers('queen', {
-                start: 23,
-                end: 36
-            }),
-            duration: 2000,
-            framerate: 10,
-            repeat: 0,
-            yoyo: true
-           
-        })
-        
-        this.anims.create({
-            key: 'queenSlide',
-            frames: this.anims.generateFrameNumbers('queen2', {
-                start: 13,
-                end: 16
+            key: 'ninjaRun',
+            frames: this.anims.generateFrameNumbers('ninja', {
+                start: 6,
+                end: 10
             }),
             duration: 500,
-            framerate: 4,
-            repeat: 1,
-           
-        }) 
-        this.anims.create({
-            key: 'queenJump',
-            frames: this.anims.generateFrameNumbers('queen2', {
-                start: 0,
-                end: 8
-            }),
-            duration: 1000,
-            framerate: 9,
-            repeat: 1,
-           
-        }) 
-    //     startJump(); {
+            framerate: 10,
+            repeat: -1
             
-    //         queen.timer = queen.time.addEvent({
-    //             delay: 100,
-    //             callback: queen.tick,
-    //             callbackScope: queen,
-    //             loop: true
-                
-    //         });
-    //         queen.setVelocityY(-100);
-    //     }
-    //     endJump(); {
-    //         queen.timer.remove();
-    // }
-       
+        })
+        // this.anims.create({
+        //     key: 'ninjaAni2',
+        //     frames: this.anims.generateFrameNumbers('ninja', {
+        //         start: 10,
+        //         end: 15
+        //     }),
+        //     duration: 1000,
+        //     framerate: 10,
+        //     repeat: -1
+            
+        // })
+        // this.anims.create({
+        //     key: 'ninjaDash',
+        //     frames: this.anims.generateFrameNumbers('ninja', {
+        //         start: 16,
+        //         end: 21
+        //     }),
+        //     duration: 1000,
+        //     framerate: 10,
+        //     repeat: -1
+        // })
+        // this.anims.create({
+        //     key: 'ninjaSleep',
+        //     frames: this.anims.generateFrameNumbers('ninja', {
+        //         start: 23,
+        //         end: 36
+        //     }),
+        //     duration: 2000,
+        //     framerate: 10,
+        //     repeat: 0,
+        //     yoyo: true
+           
+        // })
+        
+        // this.anims.create({
+        //     key: 'ninjaSlide',
+        //     frames: this.anims.generateFrameNumbers('ninja2', {
+        //         start: 13,
+        //         end: 16
+        //     }),
+        //     duration: 500,
+        //     framerate: 4,
+        //     repeat: 1,
+           
+        // }) 
+        this.anims.create({
+            key: 'ninjaJump',
+            frames: this.anims.generateFrameNumbers('ninja', {
+                start: 0,
+                end: 6
+            }),
+            duration: 500,
+            framerate: 0,
+            repeat: 1,
+           
+        }) 
+    
         
         
         
-        queen.setCollideWorldBounds(true);
-        this.physics.add.collider(queen, ground);
+        ninja.setCollideWorldBounds(true);
+        this.physics.add.collider(ninja, ground);
         theme = this.sound.add('theme',{volume: 0.2});
         jump = this.sound.add('jump',{volume: 0.2});
         bloop = this.sound.add('bloop',{volume: 0.2});
@@ -150,43 +147,41 @@ class GameScene extends Phaser.Scene {
             jump.play({loop: false});
         }
         else if (keySb.isDown) {
-            queen.setVelocityY(-100);
-            queen.anims.play('queenJump', true,)
-        //    queen.startJump;
+            ninja.setVelocityY(-100);
+            ninja.anims.play('ninjaJump', true,)
+      
         
         }
-        // else if (keySb.isUp) {
+    
+        // else if (Phaser.Input.Keyboard.JustDown(keyCtrl)) {
+        //     bloop.play({loop: false});
+        // }
+        // else if (keyCtrl.isDown) {
             
-        //     queen.endJump;
-         
-        //  }
-        else if (Phaser.Input.Keyboard.JustDown(keyCtrl)) {
-            bloop.play({loop: false});
-        }
-        else if (keyCtrl.isDown) {
-            
-            queen.anims.play('queenSlide', true,)
+        //     // ninja.anims.play('ninjaSlide', true,)
            
       
-        }else if (Phaser.Input.Keyboard.JustDown(keyX)) {
+        // }
+        else if (Phaser.Input.Keyboard.JustDown(keyX)) {
 
         sparkle.play({loop: false});
 
 
-        }else if (keyX.isDown) {
+        // }else if (keyX.isDown) {
             
-            queen.anims.play('queenSleep', true,)
+        //     // ninja.anims.play('ninjaSleep', true,)
             
         }else{
             
 
-           queen.anims.play('queenAni2', true);
+        //    ninja.anims.play('ninjaAni2', true);
+        ninja.anims.play('ninjaRun', true);
            
         }
         
-        cloud1.tilePositionX -= 2;
-        cloud2.tilePositionX -= 2;
-        snow.tilePositionY -= 2;
+        // cloud1.tilePositionX -= 2;
+        // cloud2.tilePositionX -= 2;
+        // snow.tilePositionY -= 2;
         bg.tilePositionX += 3;
         
         
