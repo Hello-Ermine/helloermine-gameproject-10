@@ -7,7 +7,6 @@ let ninja;
 let theme;
 let keySb;
 let jump;
-let sparkle;
 
 
 class GameScene extends Phaser.Scene {
@@ -18,9 +17,9 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('theme','src/sound/cookietheme.mp3');
+        this.load.audio('theme','src/sound/themesong.mp3');
         this.load.audio('jump','src/sound/jump.mp3');
-        this.load.image('bg','src/image/bg06.png');
+        this.load.image('bg','src/image/bg.png');
         this.load.image('ground','src/image/layers/ground.png');
         this.load.spritesheet('ninja','src/image/spritesheet (7).png',{frameWidth: 218, frameHeight : 164});
        
