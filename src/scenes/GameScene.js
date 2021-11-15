@@ -2,7 +2,6 @@ import Phaser from "phaser";
 
 let bg;
 let ground;
-
 let ninja;
 let theme;
 let keySb;
@@ -76,7 +75,7 @@ class GameScene extends Phaser.Scene {
     
        
         if (Phaser.Input.Keyboard.JustDown(keySb)) {
-            // jump.play({loop: false});
+            jump.play({loop: false});
             // ninja.anims.play('ninjaJump', true,)
             ninja.anims.play('ninjaJump', true,)
             ninja.setVelocityY(-500);
