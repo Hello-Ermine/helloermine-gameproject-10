@@ -81,13 +81,13 @@ class GameScene extends Phaser.Scene {
             ninja.setVelocityY(-500);
             
         }
-        else if (keySb.isDown) {
+        // else if (keySb.isDown) {
             
-        //     // setTimeout(function() { 
-        //     //     ninja.anims.play('ninjaJump', true,)
-        //     //     ninja.setVelocityY(-100) }, 1000);;
+        // //     // setTimeout(function() { 
+        // //     //     ninja.anims.play('ninjaJump', true,)
+        // //     //     ninja.setVelocityY(-100) }, 1000);;
             
-        }
+        // }
         else{ 
             
 
