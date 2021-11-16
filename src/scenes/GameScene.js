@@ -67,27 +67,39 @@ class GameScene extends Phaser.Scene {
         
       
 
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
      
       
     }
         update(delta, time) {
-    
-       
-        if (keySb.isDown && Phaser.Input.Keyboard.JustDown(keySb)) {
-            jump.play({loop: false});
-            // ninja.anims.play('ninjaJump', true,)
-            ninja.anims.play('ninjaJump', true,)
-            ninja.setVelocityY(-500);
             
+         if (ninja.body.touching.down) {
+            ninja.jumpCount = 0;
         }
-        // else if (keySb.isDown) {
-            
-        // //     // setTimeout(function() { 
-        // //     //     ninja.anims.play('ninjaJump', true,)
-        // //     //     ninja.setVelocityY(-100) }, 1000);;
+
+        let canDoubleJump = ninja.jumpCount < 2;
+
+        if (Phaser.Input.Keyboard.JustDown(keySb) && (ninja.body.touching.down || canDoubleJump )) {
+            jump.play({loop: false});
+            ninja.jumpCount++;
+            ninja.setVelocityY(-500);
+            ninja.anims.play('ninjaJump', true,)
+        }
+            // if (keySb.isDown && Phaser.Input.Keyboard.JustDown(keySb)) {
+        //     jump.play({loop: false});
+        //     // ninja.anims.play('ninjaJump', true,)
+        //     ninja.anims.play('ninjaJump', true,)
+        //     ninja.setVelocityY(-500);
             
         // }
+        
+        else if (keySb.isDown) {
+            
+            // setTimeout(function() { 
+            //     ninja.anims.play('ninjaJump', true,)
+            //     ninja.setVelocityY(-100) }, 1000);;
+            
+        }
         else{ 
             
 
