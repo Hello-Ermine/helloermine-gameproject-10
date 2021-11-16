@@ -74,7 +74,7 @@ class GameScene extends Phaser.Scene {
         update(delta, time) {
     
        
-        if (Phaser.Input.Keyboard.JustDown(keySb)) {
+        if (keySb.isDown && Phaser.Input.Keyboard.JustDown(keySb)) {
             jump.play({loop: false});
             // ninja.anims.play('ninjaJump', true,)
             ninja.anims.play('ninjaJump', true,)
@@ -83,9 +83,9 @@ class GameScene extends Phaser.Scene {
         }
         else if (keySb.isDown) {
             
-            // setTimeout(function() { 
-            //     ninja.anims.play('ninjaJump', true,)
-            //     ninja.setVelocityY(-100) }, 1000);;
+        //     // setTimeout(function() { 
+        //     //     ninja.anims.play('ninjaJump', true,)
+        //     //     ninja.setVelocityY(-100) }, 1000);;
             
         }
         else{ 
@@ -96,7 +96,7 @@ class GameScene extends Phaser.Scene {
         }
         
         
-        bg.tilePositionX += 3;
+        bg.tilePositionX += 4;
         
         
     }
