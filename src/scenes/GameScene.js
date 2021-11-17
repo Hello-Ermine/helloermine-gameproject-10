@@ -18,6 +18,9 @@ let shurikenEvent;
 let shurikenGroup;
 
 
+let ninjaHeart = 3;
+let heartGroup;
+
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -25,7 +28,7 @@ class GameScene extends Phaser.Scene {
             key: 'GameScene'
         });
     }
-
+    
     preload() {
         this.load.audio('theme','src/sound/themesong.mp3');
         this.load.audio('jump','src/sound/jump.mp3');
@@ -36,7 +39,9 @@ class GameScene extends Phaser.Scene {
         this.load.image('wood2','src/image/obj/wood2.png');
         this.load.image('shuriken','src/image/obj/shuriken.png');
         this.load.image('shuriken2','src/image/obj/shuriken2.png');
+        this.load.image('heart','src/image/heart.png');
 
+        
     
     }
 
@@ -45,6 +50,18 @@ class GameScene extends Phaser.Scene {
         ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
         ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(2000);
         
+        ninja.immortal = true;
+        ninja.setCollideWorldBounds(true);
+        this.physics.add.collider(ninja, ground);
+        theme = this.sound.add('theme',{volume: 0.2});
+        jump = this.sound.add('jump',{volume: 0.2});
+
+        theme.play({loop: true});
+        
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+
+        heartGroup = this.add.group();
+        this.createNinjaHeart();
 
         woodGroup = this.physics.add.group();
         shurikenGroup = this.physics.add.group();
@@ -57,7 +74,7 @@ class GameScene extends Phaser.Scene {
                 woodGroup.add(wood);
                 woodGroup.add(wood2);
                 woodGroup.setVelocityX(-500);
-                this.physics.add.overlap(woodGroup, ninja);
+                this.physics.add.overlap( ninja, woodGroup, onNinjaHit);
             },
             callbackScope: this,
             loop: true,
@@ -71,13 +88,49 @@ class GameScene extends Phaser.Scene {
                 shurikenGroup.add(shuriken);
                 shurikenGroup.add(shuriken2);
                 shurikenGroup.setVelocityX(-500);
-                this.physics.add.overlap(shurikenGroup, ninja);
+                this.physics.add.overlap( ninja, shurikenGroup, onNinjaHit);
             },
             callbackScope: this,
             loop: true,
         });
         
-       
+        function onNinjaHit(ninja,obj) {
+            
+            ninjaHeart--;
+            if (ninjaHeart <=0) {
+                ninjaHeart = 0;
+                console.log("game over");
+            }
+
+            updateNinjaheart();
+            ninja.immortal = true;
+            flickerTimer = this.time.addEvent({
+                delay: 100,
+                callback: ninjaFlickering,
+                repeat: 15
+            });
+        }
+
+        function ninjaFlickering() {
+            ninja.setVisible(!ninja.visible);
+
+            if (frickerTimer.repeatCount == 0) {
+                ninja.immortal = flase;
+                ninja.setVisible(true);
+                flickerTimer.remove();
+            }
+        }
+
+        function updateNinjaheart(){
+            for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
+                if (ninjaHeart < i+1) {
+                    heartGroup.getChildren()[i].setVisible(false);
+                } else {
+                    heartGroup.getChildren()[i].setVisible(true);
+                }
+            }
+        }
+
         this.anims.create({
             key: 'ninjaRun',
             frames: this.anims.generateFrameNumbers('ninja', {
@@ -101,26 +154,21 @@ class GameScene extends Phaser.Scene {
             repeat: 0,
            
         }) 
-    
-        
-        
-        
-        ninja.setCollideWorldBounds(true);
-        this.physics.add.collider(ninja, ground);
-        theme = this.sound.add('theme',{volume: 0.2});
-        jump = this.sound.add('jump',{volume: 0.2});
-
-        theme.play({loop: true});
-        
-      
-
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-     
-      
     }
+
+    createNinjaHeart() {
+        for (let i = 0; i < ninjaHeart; i++) {
+            let heart = this.add.image(900 + (i * 65),40,'heart').setDepth(11).setScale(0.15);
+    
+            heartGroup.add(heart)
+        }
+    }
+
         update(delta, time) {
             
-         if (ninja.body.touching.down) {
+        this.createNinjaHeart();
+            
+        if (ninja.body.touching.down) {
             ninja.jumpCount = 0;
         }
 
@@ -145,9 +193,21 @@ class GameScene extends Phaser.Scene {
                     woodGroup.getChildren()[i].destroy();
             }
         }
+
+        for (let i = 0; i < shurikenGroup.getChildren().length; i++) {
+            if (shurikenGroup.getChildren()[i].x < -100) {
+                shurikenGroup.getChildren()[i].destroy();
+            }
+        }
         bg.tilePositionX += 6;
+
+        this.createNinjaHeart();
     } 
+
+    
 }
+
+
 
 
 export default GameScene;
