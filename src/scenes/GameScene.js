@@ -7,6 +7,17 @@ let theme;
 let keySb;
 let jump;
 
+let wood;
+let wood2;
+let woodEvent;
+let woodGroup;
+
+let shuriken;
+let shuriken2;
+let shurikenEvent;
+let shurikenGroup;
+
+
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -21,7 +32,10 @@ class GameScene extends Phaser.Scene {
         this.load.image('bg','src/image/bg.png');
         this.load.image('ground','src/image/layers/ground.png');
         this.load.spritesheet('ninja','src/image/spritesheet (7).png',{frameWidth: 218, frameHeight : 164});
-       
+        this.load.image('wood','src/image/obj/wood.png');
+        this.load.image('wood2','src/image/obj/wood2.png');
+        this.load.image('shuriken','src/image/obj/shuriken.png');
+        this.load.image('shuriken2','src/image/obj/shuriken2.png');
 
     
     }
@@ -29,8 +43,41 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,0,1080,720,'bg').setOrigin(0,0).setDepth(1).setScale(1);
         ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
-        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(1000);
-      
+        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(2000);
+        
+
+        woodGroup = this.physics.add.group();
+        shurikenGroup = this.physics.add.group();
+
+        woodEvent = this.time.addEvent({
+            delay: 7000,
+            callback: function () {
+                wood = this.physics.add.image(Phaser.Math.Between(1500,2000), 435, 'wood').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
+                wood2 = this.physics.add.image(Phaser.Math.Between(2000,3000), 435, 'wood2').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
+                woodGroup.add(wood);
+                woodGroup.add(wood2);
+                woodGroup.setVelocityX(-500);
+                this.physics.add.overlap(woodGroup, ninja);
+            },
+            callbackScope: this,
+            loop: true,
+        });
+    
+        shurikenEvent = this.time.addEvent({
+            delay: 7000,
+            callback: function () {
+                shuriken = this.physics.add.image(Phaser.Math.Between(1500,5000), 515, 'shuriken').setScale(0.5).setDepth(3).setSize(250,220).setOffset(140,120);
+                shuriken2 = this.physics.add.image(Phaser.Math.Between(3000,4000), 495, 'shuriken2').setScale(0.5).setDepth(3).setSize(220,220).setOffset(110,160);
+                shurikenGroup.add(shuriken);
+                shurikenGroup.add(shuriken2);
+                shurikenGroup.setVelocityX(-500);
+                this.physics.add.overlap(shurikenGroup, ninja);
+            },
+            callbackScope: this,
+            loop: true,
+        });
+        
+       
         this.anims.create({
             key: 'ninjaRun',
             frames: this.anims.generateFrameNumbers('ninja', {
@@ -82,36 +129,25 @@ class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keySb) && (ninja.body.touching.down || canDoubleJump )) {
             jump.play({loop: false});
             ninja.jumpCount++;
-            ninja.setVelocityY(-500);
+            ninja.setVelocityY(-960);
             ninja.anims.play('ninjaJump', true,)
         }
-            // if (keySb.isDown && Phaser.Input.Keyboard.JustDown(keySb)) {
-        //     jump.play({loop: false});
-        //     // ninja.anims.play('ninjaJump', true,)
-        //     ninja.anims.play('ninjaJump', true,)
-        //     ninja.setVelocityY(-500);
-            
-        // }
         
         else if (keySb.isDown) {
-            
-            // setTimeout(function() { 
-            //     ninja.anims.play('ninjaJump', true,)
-            //     ninja.setVelocityY(-100) }, 1000);;
-            
+
         }
         else{ 
-            
-
         ninja.anims.play('ninjaRun', true);
-           
         }
         
-        
-        bg.tilePositionX += 3;
-        
-        
-    }
+        for (let i = 0; i < woodGroup.getChildren().length; i++) {
+            if (woodGroup.getChildren()[i].x < -100) {
+                    woodGroup.getChildren()[i].destroy();
+            }
+        }
+        bg.tilePositionX += 6;
+    } 
 }
+
 
 export default GameScene;
