@@ -21,8 +21,8 @@ const config = {
     },
     scene: [
         MainMenu,
-        GameOver,
-        GameScene
+        GameScene,
+        GameOver
        
     ],
     

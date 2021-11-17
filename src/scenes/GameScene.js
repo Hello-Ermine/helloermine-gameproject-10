@@ -61,7 +61,7 @@ class GameScene extends Phaser.Scene {
         woodGroup = this.physics.add.group();
         shurikenGroup = this.physics.add.group();
 
-        //อนิเมชั้น
+        //อนิเมชั่น obj
         woodEvent = this.time.addEvent({
             delay: 5000,
             callback: function () {
