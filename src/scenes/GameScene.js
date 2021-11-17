@@ -45,7 +45,7 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,0,1080,720,'bg').setOrigin(0,0).setDepth(1).setScale(1);
         ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
-        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(70,140).setOffset(80,10).setGravityY(2300);
+        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(50,140).setOffset(90,10).setGravityY(2300);
         
         
         this.physics.add.collider(ninja, ground); 
@@ -65,10 +65,10 @@ class GameScene extends Phaser.Scene {
 
         //อนิเมชั่น obj
         woodEvent = this.time.addEvent({
-            delay: 8000,
+            delay: 5000,
             callback: function () {
-                wood = this.physics.add.image(Phaser.Math.Between(1500,2000), 435, 'wood').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
-                wood2 = this.physics.add.image(Phaser.Math.Between(2300,3000), 435, 'wood2').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
+                wood = this.physics.add.image(Phaser.Math.Between(1500,2000), 435, 'wood').setScale(0.5).setDepth(3).setSize(135,350).setOffset(190,150);
+                wood2 = this.physics.add.image(Phaser.Math.Between(2300,3000), 435, 'wood2').setScale(0.5).setDepth(3).setSize(135,350).setOffset(190,150);
                 woodGroup.add(wood);
                 woodGroup.add(wood2);
                 woodGroup.setVelocityX(-500);
@@ -84,11 +84,11 @@ class GameScene extends Phaser.Scene {
         
 
         shurikenEvent = this.time.addEvent({
-            delay: 5000,
+            delay: 8000,
             callback: function () {
-                shuriken = this.physics.add.image(Phaser.Math.Between(1500,5000), 515, 'shuriken').setScale(0.5).setDepth(3).setSize(250,220).setOffset(140,120);
-                shuriken2 = this.physics.add.image(Phaser.Math.Between(3000,4000), 495, 'shuriken2').setScale(0.5).setDepth(3).setSize(220,220).setOffset(110,160);
-                kunai = this.physics.add.image(Phaser.Math.Between(1300,4000), 535, 'kunai').setScale(0.2).setDepth(3).setSize(110,180).setOffset(180,200);
+                shuriken = this.physics.add.image(Phaser.Math.Between(1200,1300), 515, 'shuriken').setScale(0.5).setDepth(3).setSize(250,200).setOffset(140,140);
+                shuriken2 = this.physics.add.image(Phaser.Math.Between(2000,3000), 495, 'shuriken2').setScale(0.5).setDepth(3).setSize(220,200).setOffset(110,180);
+                kunai = this.physics.add.image(Phaser.Math.Between(1100,4000), 535, 'kunai').setScale(0.2).setDepth(3).setSize(110,180).setOffset(180,200);
                 shurikenGroup.add(shuriken);
                 shurikenGroup.add(shuriken2);
                 shurikenGroup.add(kunai);
@@ -140,7 +140,7 @@ class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keySb) && (ninja.body.touching.down || canDoubleJump )) {
             jump.play({loop: false});
             ninja.jumpCount++;
-            ninja.setVelocityY(-980);
+            ninja.setVelocityY(-990);
             ninja.anims.play('ninjaJump', true,)
         } else if (keySb.isDown) {
 
