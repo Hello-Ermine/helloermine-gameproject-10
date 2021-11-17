@@ -43,10 +43,10 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,0,1080,720,'bg').setOrigin(0,0).setDepth(1).setScale(1);
         ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
-        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(2000);
+        ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(100,140).setOffset(50,10).setGravityY(2000);
         
         
-        this.physics.add.collider(ninja, ground);
+        this.physics.add.collider(ninja, ground); 
         theme = this.sound.add('theme',{volume: 0.2});
         jump = this.sound.add('jump',{volume: 0.2});
 
@@ -63,14 +63,16 @@ class GameScene extends Phaser.Scene {
 
         //อนิเมชั้น
         woodEvent = this.time.addEvent({
-            delay: 7000,
+            delay: 5000,
             callback: function () {
                 wood = this.physics.add.image(Phaser.Math.Between(1500,2000), 435, 'wood').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
                 wood2 = this.physics.add.image(Phaser.Math.Between(2000,3000), 435, 'wood2').setScale(0.5).setDepth(3).setSize(135,380).setOffset(190,120);
                 woodGroup.add(wood);
                 woodGroup.add(wood2);
                 woodGroup.setVelocityX(-500);
-                this.physics.add.overlap(woodGroup, ninja);
+                this.physics.add.collider(woodGroup, ninja, ()=> {
+                    this.scene.start('GameOver');
+                });
             },
             callbackScope: this,
             loop: true,
@@ -84,7 +86,9 @@ class GameScene extends Phaser.Scene {
                 shurikenGroup.add(shuriken);
                 shurikenGroup.add(shuriken2);
                 shurikenGroup.setVelocityX(-500);
-                this.physics.add.overlap(shurikenGroup, ninja);
+                this.physics.add.collider(shurikenGroup, ninja, ()=> {
+                    this.scene.start('GameOver');
+                });
             },
             callbackScope: this,
             loop: true,
