@@ -12,8 +12,8 @@ class GameOver extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('restart','src/image/testImage.jpg');
-        this.load.image('restart','src/image/testImage.jpg');
+        this.load.image('restart','src/image/button/start.png');
+        this.load.image('restart','src/image/.jpg');
     
     }
 
@@ -23,6 +23,8 @@ class GameOver extends Phaser.Scene {
         restart.on('pointerup',()=>{
             this.scene.start('GameScene');
         })
+
+        mainmenu = 
     }
 
 

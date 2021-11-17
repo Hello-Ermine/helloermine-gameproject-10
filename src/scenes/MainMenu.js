@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 
-let play;
+let start;
 
 class MainMenu extends Phaser.Scene {
     constructor(test) {
@@ -11,14 +11,15 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('play','src/image/testImage.jpg');
+        this.load.image('bg','')
+        this.load.image('start','src/image/button/start');
     
     }
 
     create() {
-        play = this.add.image(400,500,'play').setScale(0.1);
-        play.setInteractive();
-        play.on('pointerup',()=>{
+        start = this.add.image(400,500,'start').setScale(0.1);
+        start.setInteractive();
+        start.on('pointerup',()=>{
             this.scene.start('GameScene');
         })
     }
