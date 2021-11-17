@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 
 let restart;
+let mainmenu;
 
 class GameOver extends Phaser.Scene {
     constructor(test) {
@@ -12,12 +13,16 @@ class GameOver extends Phaser.Scene {
 
     preload() {
         this.load.image('restart','src/image/testImage.jpg');
+        this.load.image('restart','src/image/testImage.jpg');
     
     }
 
     create() {
         restart = this.add.image(400,500,'restart').setScale(0.1);
-        
+        restart.setInteractive();
+        restart.on('pointerup',()=>{
+            this.scene.start('GameScene');
+        })
     }
 
 

@@ -72,6 +72,7 @@ class GameScene extends Phaser.Scene {
                 woodGroup.setVelocityX(-500);
                 this.physics.add.collider(woodGroup, ninja, ()=> {
                     this.scene.start('GameOver');
+                    theme.stop();
                 });
             },
             callbackScope: this,
@@ -88,6 +89,7 @@ class GameScene extends Phaser.Scene {
                 shurikenGroup.setVelocityX(-500);
                 this.physics.add.collider(shurikenGroup, ninja, ()=> {
                     this.scene.start('GameOver');
+                    theme.stop();
                 });
             },
             callbackScope: this,
