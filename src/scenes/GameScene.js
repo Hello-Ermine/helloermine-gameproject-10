@@ -45,10 +45,23 @@ class GameScene extends Phaser.Scene {
         ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,-100).setImmovable().setVisible();
         ninja = this.physics.add.sprite(120,490,'ninja').setScale(1).setDepth(10).setSize(120,140).setOffset(40,10).setGravityY(2000);
         
+        
+        this.physics.add.collider(ninja, ground);
+        theme = this.sound.add('theme',{volume: 0.2});
+        jump = this.sound.add('jump',{volume: 0.2});
+
+        theme.play({loop: true});
+        
+      
+
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+     
+      
 
         woodGroup = this.physics.add.group();
         shurikenGroup = this.physics.add.group();
 
+        //อนิเมชั้น
         woodEvent = this.time.addEvent({
             delay: 7000,
             callback: function () {
@@ -103,20 +116,6 @@ class GameScene extends Phaser.Scene {
         }) 
     
         
-        
-        
-        ninja.setCollideWorldBounds(true);
-        this.physics.add.collider(ninja, ground);
-        theme = this.sound.add('theme',{volume: 0.2});
-        jump = this.sound.add('jump',{volume: 0.2});
-
-        theme.play({loop: true});
-        
-      
-
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-     
-      
     }
         update(delta, time) {
             
