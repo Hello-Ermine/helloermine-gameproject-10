@@ -140,7 +140,7 @@ class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keySb) && (ninja.body.touching.down || canDoubleJump )) {
             jump.play({loop: false});
             ninja.jumpCount++;
-            ninja.setVelocityY(-990);
+            ninja.setVelocityY(-1000);
             ninja.anims.play('ninjaJump', true,)
         } else if (keySb.isDown) {
 
