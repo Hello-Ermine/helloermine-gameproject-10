@@ -18,6 +18,8 @@ let kunai;
 let shurikenEvent;
 let shurikenGroup;
 
+let timer;
+
 
 
 class GameScene extends Phaser.Scene {
@@ -124,14 +126,16 @@ class GameScene extends Phaser.Scene {
             duration: 500,
             framerate: 0,
             repeat: 0,
-           
         }) 
-    
-        
+            timer = this.add.text(500, 20).setDepth(15);
     }
+
+
         update(delta, time) {
-            
-         if (ninja.body.touching.down) {
+        
+        timer.setText('Time: ' + delta);
+
+        if (ninja.body.touching.down) {
             ninja.jumpCount = 0;
         }
 
