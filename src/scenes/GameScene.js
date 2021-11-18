@@ -21,7 +21,7 @@ let shurikenEvent;
 let shurikenGroup;
 
 let timer;
-let time1 = 0;
+let time1;
 let timertext;
 
 
@@ -58,9 +58,15 @@ class GameScene extends Phaser.Scene {
         theme = this.sound.add('theme',{volume: 0.2});
         jump = this.sound.add('jump',{volume: 0.2});
 
-        theme.play({loop: true});
-        
-      
+        theme.play({loop: true})
+
+        // if (theme.stop()) {
+        //     theme.play({loop: true})
+        // } else {
+        //     theme.play({loop: true})
+        // }
+
+        time1 = 0;
 
         keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
      
@@ -69,7 +75,6 @@ class GameScene extends Phaser.Scene {
         pause.on('pointerup',()=>{
             this.scene.launch('Pause')
             this.scene.pause();
-            theme.stop();
         })
         pause.on('pointerover',()=>{
             pause.setScale(0.45);
@@ -92,7 +97,7 @@ class GameScene extends Phaser.Scene {
                 woodGroup.add(wood2);
                 woodGroup.setVelocityX(-500);
                 this.physics.add.collider(woodGroup, ninja, ()=> {
-                    this.scene.start('GameOver');
+                    this.scene.start('GameOver',time1);
                     theme.stop();
                 });
             },
@@ -113,7 +118,7 @@ class GameScene extends Phaser.Scene {
                 shurikenGroup.add(kunai);
                 shurikenGroup.setVelocityX(-500);
                 this.physics.add.collider(shurikenGroup, ninja, ()=> {
-                    this.scene.start('GameOver');
+                    this.scene.start('GameOver',time1);
                     theme.stop();
                 });
             },
@@ -158,14 +163,14 @@ class GameScene extends Phaser.Scene {
         
         
         
-        timertext = this.add.text(500, 20).setDepth(15);
+        timertext = this.add.text(450, 20,'Time : ' + time1,{font: '45px Courier'}).setDepth(15);
     }
 
 
         update(delta, time) {
         
 
-        timertext.setText('Time: ' + time1);
+        timertext.setText('Time : ' + time1,);
 
         if (ninja.body.touching.down) {
             ninja.jumpCount = 0;
