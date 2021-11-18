@@ -24,9 +24,8 @@ class Pause extends Phaser.Scene {
         resume = this.add.image(780,520,'resume').setScale(0.55).setDepth(2);
         resume.setInteractive();
         resume.on('pointerup',()=>{
-            this.scene.resume('Gamescene');
+            this.scene.resume('GameScene');
             this.scene.stop();
-            
             
         })
         resume.on('pointerover',()=>{

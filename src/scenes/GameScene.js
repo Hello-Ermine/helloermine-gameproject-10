@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
         pause = this.add.image(70,30,'pause').setScale(0.4).setDepth(11);
         pause.setInteractive();
         pause.on('pointerup',()=>{
-            this.scene.start('Pause')
+            this.scene.launch('Pause')
             this.scene.pause();
             theme.stop();
         })
@@ -146,9 +146,9 @@ class GameScene extends Phaser.Scene {
     
         update(delta, time) {
             
-         if (ninja.body.touching.down) {
-            ninja.jumpCount = 0;
-        }
+        //  if (ninja.body.touching.down) {
+        //     ninja.jumpCount = 0;
+        // }
 
         let canDoubleJump = ninja.jumpCount < 2;
 
