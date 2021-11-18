@@ -60,17 +60,11 @@ class GameScene extends Phaser.Scene {
 
         theme.play({loop: true})
 
-        // if (theme.stop()) {
-        //     theme.play({loop: true})
-        // } else {
-        //     theme.play({loop: true})
-        // }
-
         time1 = 0;
 
         keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
      
-        pause = this.add.image(70,30,'pause').setScale(0.4).setDepth(11);
+        pause = this.add.image(1000,50,'pause').setScale(0.4).setDepth(11);
         pause.setInteractive();
         pause.on('pointerup',()=>{
             this.scene.launch('Pause')
