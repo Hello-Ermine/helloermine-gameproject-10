@@ -6,11 +6,13 @@ let ninja;
 let theme;
 let keySb;
 let jump;
+let pause;
 
 let wood;
 let wood2;
 let woodEvent;
 let woodGroup;
+
 
 let shuriken;
 let shuriken2;
@@ -42,7 +44,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('shuriken','src/image/obj/shuriken.png');
         this.load.image('shuriken2','src/image/obj/shuriken2.png');
         this.load.image('kunai','src/image/obj/kunai.png');
-
+        this.load.image('pause','src/image/button/Pause.png');
     
     }
 
@@ -60,9 +62,22 @@ class GameScene extends Phaser.Scene {
         
       
 
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
      
-      
+        pause = this.add.image(70,30,'pause').setScale(0.4).setDepth(11);
+        pause.setInteractive();
+        pause.on('pointerup',()=>{
+            this.scene.launch('Pause')
+            this.scene.pause();
+            theme.stop();
+        })
+        pause.on('pointerover',()=>{
+            pause.setScale(0.45);
+        })
+        pause.on('pointerout',()=>{
+            pause.setScale(0.4);
+        })
+    
 
         woodGroup = this.physics.add.group();
         shurikenGroup = this.physics.add.group();
@@ -105,7 +120,7 @@ class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true,
         });
-        
+    
        
         this.anims.create({
             key: 'ninjaRun',
@@ -161,7 +176,7 @@ class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keySb) && (ninja.body.touching.down || canDoubleJump )) {
             jump.play({loop: false});
             ninja.jumpCount++;
-            ninja.setVelocityY(-990);
+            ninja.setVelocityY(-1000);
             ninja.anims.play('ninjaJump', true,)
         } else if (keySb.isDown) {
 
@@ -175,8 +190,9 @@ class GameScene extends Phaser.Scene {
             }
         }
         bg.tilePositionX += 6;
-    } 
-}
-
+         }
+        }
+     
+    
 
 export default GameScene;
