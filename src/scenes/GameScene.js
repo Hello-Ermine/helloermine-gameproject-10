@@ -56,7 +56,7 @@ class GameScene extends Phaser.Scene {
         
       
 
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
      
       
 
