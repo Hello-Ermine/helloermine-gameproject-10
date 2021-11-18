@@ -23,6 +23,7 @@ class MainMenu extends Phaser.Scene {
         start.setInteractive();
         start.on('pointerup',()=>{
             this.scene.start('GameScene');
+            time1 = 0;
         })
         start.on('pointerover',()=>{
             start.setScale(0.8);
@@ -34,7 +35,7 @@ class MainMenu extends Phaser.Scene {
 
 
     update(delta, time) {
-
+        
     } 
 }
 

@@ -19,6 +19,8 @@ let shurikenEvent;
 let shurikenGroup;
 
 let timer;
+let time1 = 0;
+let timertext;
 
 
 
@@ -127,13 +129,28 @@ class GameScene extends Phaser.Scene {
             framerate: 0,
             repeat: 0,
         }) 
-            timer = this.add.text(500, 20).setDepth(15);
+            
+        timer = this.time.addEvent({
+            delay: 1000,               
+            callback: function() {
+                if (time1 >= 0) {time1++;};
+                
+            },
+            callbackScope: this,
+            loop: true
+            
+        });
+        
+        
+        
+        timertext = this.add.text(500, 20).setDepth(15);
     }
 
 
         update(delta, time) {
         
-        timer.setText('Time: ' + delta);
+
+        timertext.setText('Time: ' + time1);
 
         if (ninja.body.touching.down) {
             ninja.jumpCount = 0;

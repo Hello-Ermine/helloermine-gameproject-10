@@ -20,8 +20,8 @@ const config = {
         }
     },
     scene: [
-        MainMenu,
-        GameScene,
+        // MainMenu,
+        // GameScene,
         GameOver
        
     ],

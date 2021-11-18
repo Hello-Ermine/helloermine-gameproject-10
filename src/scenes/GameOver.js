@@ -27,6 +27,7 @@ class GameOver extends Phaser.Scene {
         restart.setInteractive();
         restart.on('pointerup',()=>{
             this.scene.start('GameScene');
+            time1 = 0;
         })
         restart.on('pointerover',()=>{
             restart.setScale(0.8);
@@ -46,10 +47,12 @@ class GameOver extends Phaser.Scene {
         mainmenu.on('pointerout',()=>{
             mainmenu.setScale(0.55);
         })
+        
+        timertext = this.add.text(500, 20,"Time: " ).setDepth(15);
     }
 
     update(delta, time) {
-
+        // timertext.setText('Time: ' + time1);
     } 
 }
 
