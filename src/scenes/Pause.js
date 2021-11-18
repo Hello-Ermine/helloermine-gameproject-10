@@ -42,3 +42,4 @@ class Pause extends Phaser.Scene {
 
     } 
 }
+export default Pause;
